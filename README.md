@@ -32,3 +32,9 @@ Parâmetros:
 A automação consome a API REST:
 
 `https://date.nager.at/api/v3/PublicHolidays/{ano}/{pais}`
+
+
+### Integrantes
+
+- Nome: Lorenzo Gomes Andreata, Lucas Moreno Matheus
+- RM: 551117, 97158
