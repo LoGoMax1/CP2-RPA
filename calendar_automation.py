@@ -14,6 +14,15 @@ from typing import Dict, List
 import requests
 
 API_URL = "https://date.nager.at/api/v3/PublicHolidays/{year}/{country}"
+WEEKDAYS_PT_BR = (
+    "segunda-feira",
+    "terça-feira",
+    "quarta-feira",
+    "quinta-feira",
+    "sexta-feira",
+    "sábado",
+    "domingo",
+)
 
 
 @dataclass
@@ -47,7 +56,7 @@ def build_plan(country: str, start_day: date, days: int) -> List[DayPlan]:
     plan: List[DayPlan] = []
     for offset in range(days):
         current_day = start_day + timedelta(days=offset)
-        weekday = current_day.strftime("%A")
+        weekday = WEEKDAYS_PT_BR[current_day.weekday()]
         is_weekend = current_day.weekday() >= 5
 
         plan.append(
@@ -76,7 +85,7 @@ def print_plan(plan: List[DayPlan]) -> None:
         if not status:
             status.append("Dia útil")
 
-        print(f"{item.day.isoformat()} | {item.weekday:<12} | {' | '.join(status)}")
+        print(f"{item.day.strftime('%d/%m/%Y')} | {item.weekday:<13} | {' | '.join(status)}")
 
 
 def parse_args() -> argparse.Namespace:
